@@ -13,6 +13,14 @@ class ContactForm extends Component {
       number: ''
   };
 
+    componentDidMount() {
+    
+  };
+
+  componentDidUpdate() { }
+  
+  componentWillUnmount(){}
+
   //writing data from input
   handleChange = (e) => {
     console.log(e.target.value)

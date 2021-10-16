@@ -18,6 +18,23 @@ class App extends Component {
     number: ''
   };
 
+  // rendering the data from localStorage
+  componentDidMount() {
+    const localContacts = localStorage.getItem('contacts');
+    const parseProducts = JSON.parse(localContacts);
+    this.setState({ contacts: parseProducts });
+  };
+
+  // writing the data to localStorage
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.products) {
+  localStorage.setItem("contacts", JSON.stringify(this.state.contacts))
+}};
+
+  componentWillUnmount() {
+    
+  };
+
   addNewContacts = data => {
     this.setState((prevState) => {
       if (prevState.contacts.some(contact => contact.name.toLowerCase().includes(data.name.toLowerCase()))) {
