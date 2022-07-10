@@ -1,7 +1,6 @@
-import './App.css';
+import s from './App.module.css';
 import { Component } from 'react';
 import ContactList from './components/ContactList/ContactList';
-import Container from './components/Container/Container';
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 
@@ -21,8 +20,10 @@ class App extends Component {
   // rendering the data from localStorage
   componentDidMount() {
     const localContacts = localStorage.getItem('contacts');
-    const parseProducts = JSON.parse(localContacts);
-    this.setState({ contacts: parseProducts });
+    const parseContacts = JSON.parse(localContacts);
+    if (parseContacts) {
+        this.setState({ contacts: parseContacts });
+    }
   };
 
   // writing the data to localStorage
@@ -48,14 +49,12 @@ class App extends Component {
 
 
   deleteContact = id => {
-    // console.log('DELETE')
     this.setState(prev => ({
       contacts: prev.contacts.filter(contact => contact.id !== id),
     }))
   };
 
   filterName = e => {
-    // console.log('FILTER')
     this.setState({
       filter: e.currentTarget.value,
     })
@@ -65,35 +64,27 @@ class App extends Component {
     const { contacts, filter } = this.state;
     const nameToLowerCase = filter.toLowerCase();
 
-    return (
-      contacts.filter(contact =>
-        contact.name.toLowerCase().includes(nameToLowerCase)
-      )
-    )
+return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(nameToLowerCase)
+    );
   };
 
   render() {
-    // const { filter } = this.state;
-
     const filteredContacts = this.getFilteredContacts();
-    console.log(filteredContacts);
     
     return (
-      <div className="App">
-        <Container>
-         <h1>Phonebook</h1>
+      <div className={s.App}>
+        <h1 className={s.title}>Phonebook</h1>
         <ContactForm addNewContacts={this.addNewContacts}
         />
-        </Container>
 
-        <Container>
           <h2>Contacts</h2>
             <Filter value={this.state.filter} onChange={ this.filterName}/>
           <ContactList
             contacts={filteredContacts}
             onDeleteBtn={this.deleteContact}
             />
-        </Container>
+
       </div>
     )
   }

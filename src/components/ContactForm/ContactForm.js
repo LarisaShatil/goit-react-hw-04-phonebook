@@ -8,7 +8,6 @@ class ContactForm extends Component {
   numberId = uuid();
 
   state = {
-      contacts: [],
       name: '',
       number: ''
   };
@@ -51,7 +50,7 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className={s.form} onSubmit={this.handleSubmit}>
         <label
           className={s.label}
           htmlFor={this.nameId}>👤 Name
