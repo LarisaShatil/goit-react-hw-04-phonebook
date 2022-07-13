@@ -32,10 +32,6 @@ class App extends Component {
   localStorage.setItem("contacts", JSON.stringify(this.state.contacts))
 }};
 
-  componentWillUnmount() {
-    
-  };
-
   addNewContacts = data => {
     this.setState((prevState) => {
       if (prevState.contacts.some(contact => contact.name.toLowerCase().includes(data.name.toLowerCase()))) {
