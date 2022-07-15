@@ -12,9 +12,7 @@ class ContactForm extends Component {
       number: ''
   };
 
-    componentDidMount() {
-    
-  };
+    componentDidMount() {};
 
   componentDidUpdate() { }
   
