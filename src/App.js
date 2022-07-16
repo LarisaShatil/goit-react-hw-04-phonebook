@@ -53,13 +53,14 @@ const App = () => {
       <h1 className={s.title}>Phonebook</h1>
       <ContactForm addNewContacts={addNewContacts}
       />
-
-      <h2>Contacts</h2>
-      <Filter value={filter} onChange={filterName} />
-      <ContactList
+       <h2>Contacts</h2>
+      {contacts.length > 1 && <Filter value={filter} onChange={filterName} />}
+      { contacts.length > 0 && <ContactList
         contacts={getFilteredContacts()}
         onDeleteBtn={deleteContact}
-      />
+        />
+      }
+
     </div>
   )
 };
