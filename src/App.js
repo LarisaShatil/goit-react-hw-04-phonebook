@@ -7,26 +7,21 @@ import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 
 const App = () => {
-  const [contacts, setContacts] = useState([
+  const defaultContacts = [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ]);
+  ];
+
+  const [contacts, setContacts] = useState(() => {
+    const localContacts = JSON.parse(localStorage.getItem('contacts'));
+    return localContacts ? localContacts : defaultContacts;
+  });
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    const localContacts = JSON.parse(localStorage.getItem('contacts'));
-    if (localContacts.length > 0) {
-      setContacts(localContacts);
-      window.localStorage.setItem("contacts", JSON.stringify(localContacts));
-    } else {
-       window.localStorage.setItem("contacts", JSON.stringify(contacts));
-    }
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem("contacts", JSON.stringify(contacts));
+    window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
 
